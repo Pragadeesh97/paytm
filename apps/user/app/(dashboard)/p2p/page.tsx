@@ -4,7 +4,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../../lib/auth";
 import SendMoney from "../../../components/sendMoneyComponent";
 
-export async function getp2pTransactions() {
+async function getp2pTransactions() {
   const session = await getServerSession(authOptions);
   const userId = session.user.id;
   console.log("userId in getp2p", userId);
