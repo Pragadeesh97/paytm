@@ -1,17 +1,14 @@
-"use client";
-import { PrismaClient } from "@repo/db/client";
-import { AppBar } from "@repo/ui/appbar";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
+import { authOptions } from "./lib/auth";
 
-const prisma = new PrismaClient();
-export default function Page(): JSX.Element {
-  console.log("prisma", prisma);
-  return (
-    <>
-      <AppBar
-        user="Pragadeesh"
-        onSignin={() => console.log("Sign in")}
-        onSignout={() => console.log("Signout")}
-      />
-    </>
-  );
+export default async function Page(): JSX.Element {
+  const session = await getServerSession(authOptions);
+  console.log("session is: ", session);
+  if (session?.user) {
+    redirect("/dashboard");
+  } else {
+    redirect("/api/auth/signin");
+  }
+  return <></>;
 }
