@@ -19,7 +19,7 @@ jobs:
         run: npm install
 
       - name: Generate client
-        run: npm run dbn:generate
+        run: npm run db:generate
 
       - name: Run build
         run: npm run build
