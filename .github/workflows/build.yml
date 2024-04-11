@@ -1,0 +1,25 @@
+name: Build on PR
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3 #ceckout the current repo into git build
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Generate client
+        run: npm run dbn:generate
+
+      - name: Run build
+        run: npm run build
